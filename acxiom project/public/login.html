@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Login</title><link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css' rel='stylesheet'>
+<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js'></script></head><body>
+<div class="container mt-5"><div class="row justify-content-center"><div class="col-md-6"><div class="card p-4"><h4>Library Login</h4><div id="msg" class="text-danger"></div><div class="mb-2"><label>Username</label><input id="username" class="form-control" /></div><div class="mb-2"><label>Password</label><input id="password" type="password" class="form-control" /></div><button id="loginBtn" class="btn btn-primary">Login</button><p class="mt-2"><small>Admin: adm/adm | User: user/user</small></p></div></div></div></div>
+<script>
+document.getElementById('loginBtn').addEventListener('click', async ()=>{
+  const u = document.getElementById('username').value.trim();
+  const p = document.getElementById('password').value.trim();
+  const msg = document.getElementById('msg'); msg.innerText = '';
+  if(!u||!p){ msg.innerText='Enter username and password'; return; }
+  try{
+    const res = await fetch('/api/login', { method:'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({username:u,password:p}) });
+    const d = await res.json();
+    if(!res.ok){ msg.innerText = d.message || 'Login failed'; return; }
+    localStorage.setItem('role', d.role);
+    location.href = '/dashboard.html';
+  }catch(e){ msg.innerText = 'Network error'; }
+});
+</script>
+</body></html>

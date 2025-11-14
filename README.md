@@ -2,7 +2,7 @@
 
 1. npm install
 2. npm start
-finaly
+------
 Open http://localhost:3000/login.html
 Admin: adm / adm
 User: user / user

@@ -7,4 +7,5 @@ Open http://localhost:3000/login.html
 Admin: adm / adm
 User: user / user
 Fine = Rs 10/day
+(if you are reading this then commit some changes)
 
